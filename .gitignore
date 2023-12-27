@@ -1,0 +1,46 @@
+# Dependency directories
+node_modules/
+
+# User-specific files
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Environment variables
+.env
+
+# VS Code directories
+.vscode/
+
+# Editor config
+.editorconfig
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn integrity file
+.yarn-integrity
+
+# dotenv environment variable file
+.env
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

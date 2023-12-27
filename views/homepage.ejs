@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            width: 13%;
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .upload-btn {
+            margin-top: 22px;
+            border-radius: 15px;
+        }
+
+        .mb-4 {
+            margin-top: 8%;
+        }
+
+        table {
+            margin-top: 5%;
+        }
+
+        .btn-action {
+            width: 100px;
+            border-radius: 20px;
+        }
+
+        .nav-tabs {
+            margin-top: 6%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="mb-4">
+            <h1 class="mb-0">Welcome, <%= username %>
+            </h1>
+            <button class="btn btn-danger logout-btn" onclick="logout()">Logout</button>
+        </header>
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="allFilesTab" data-toggle="tab" href="#allFiles">All Files</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="myFilesTab" data-toggle="tab" href="#myFiles">My Files</a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="allFiles">
+                <table class="table table-bordered center-table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>SampleFile.txt</td>
+                            <td>John Doe</td>
+                            <td>2023-01-01</td>
+                            <td>
+                                <button class="btn btn-primary btn-action" onclick="preview()">Preview</button>
+                                <span></span>
+                                <button class="btn btn-primary btn-action" onclick="download()">Download</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>SampleFile.txt</td>
+                            <td>John Doe</td>
+                            <td>2023-01-01</td>
+                            <td>
+                                <button class="btn btn-primary btn-action" onclick="preview()">Preview</button>
+                                <span></span>
+                                <button class="btn btn-primary btn-action" onclick="download()">Download</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>SampleFile.txt</td>
+                            <td>John Doe</td>
+                            <td>2023-01-01</td>
+                            <td>
+                                <button class="btn btn-primary btn-action" onclick="preview()">Preview</button>
+                                <span></span>
+                                <button class="btn btn-primary btn-action" onclick="download()">Download</button>
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="myFiles">
+                <table class="table table-bordered center-table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>.txt</td>
+                            <td>John Doe</td>
+                            <td>2023-01-01</td>
+                            <td>
+                                <button class="btn btn-primary btn-action" onclick="deleteFile()">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>.txt</td>
+                            <td>John Doe</td>
+                            <td>2023-01-01</td>
+                            <td>
+                                <button class="btn btn-primary btn-action" onclick="deleteFile()">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>.txt</td>
+                            <td>John Doe</td>
+                            <td>2023-01-01</td>
+                            <td>
+                                <button class="btn btn-primary btn-action" onclick="deleteFile()">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <button class="btn btn-success upload-btn" onclick="uploadFile()">Upload File</button>
+    </div>
+
+    <script>
+        console.warn('Homepage working')
+        function checkUserCookie() {
+            const allCookies = document.cookie;
+            const cookieArray = allCookies.split('; ');
+            const userCookie = cookieArray.find(cookie => cookie.startsWith('user='));
+            if (!userCookie) {
+                window.location.href = '/login';
+            }
+        }
+        checkUserCookie();
+        function logout() {
+            if(confirm('Do you want to logout ?')) {
+                document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = '/login';
+            }
+        }
+
+        function deleteFile() {
+
+        }
+
+        function preview() {
+
+        }
+
+        function uploadFile() {
+            alert('uploaded ')
+            window.location.href = '/upload';
+        }
+
+        function download() {
+            alert('deleted');
+            console.log('Deleting file:');
+        }
+    </script>
+</body>
+
+</html>
