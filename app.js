@@ -53,7 +53,7 @@ app.post('/login', (req, res) => {
 
 app.get('/home', (req,res)=>{
     res.status(200).render('homepage', {
-        username: 'Ash'
+        username: 'user'
     });
 
 });

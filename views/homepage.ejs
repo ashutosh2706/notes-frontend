@@ -1,224 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Welcome <%=username%></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .logout-btn {
-            width: 13%;
-            font-size: 16px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 10px;
-            margin: 10px 0;
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
             border: none;
-            border-radius: 15px;
-            cursor: pointer;
+            text-decoration: none;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
         }
 
-        .upload-btn {
-            margin-top: 22px;
-            border-radius: 15px;
+        body {
+            background: #dfe9f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .mb-4 {
-            margin-top: 8%;
+        nav {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            background: #fff;
+            width: 280px;
+            overflow: hidden;
+            transition: width 0.2s linear;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            display: flex;
+            transition: all 0.2s ease;
+            margin: 10px 0 30px 10px;
+        }
+
+        .logo span {
+            font-weight: bold;
+            padding-left: 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+        a {
+            position: relative;
+            color: rgba(85, 83, 83);
+            font-size: 14px;
+            display: table;
+            width: 300px;
+            padding: 10px;
+         }
+
+         .fas {
+            position: relative;
+            width: 85px;
+            height: 45px;
+            top: 14px;
+            font-size: 20px;
+            text-align: center;
+         }
+
+         .nav-item {
+            position: relative;
+            top: 12px;
+            margin-left: 10px;
+
+         }
+
+        a:hover {
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1));
+        }
+
+        .active {
+            transition: 0.1s ease;
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1));
+        }
+        
+        table, th, td {
+            padding: 1rem;
+        }
+
+        .table {
+            margin-left: 250px;
+            margin-top: 45px;
         }
 
         table {
-            margin-top: 5%;
+            width: 100%;
         }
 
-        .btn-action {
-            width: 100px;
-            border-radius: 20px;
+        main.table {
+            width: 70vw;
+            height: 90vh;
+            backdrop-filter: blur(7px);
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: 1.0rem;
+            overflow: auto;
         }
 
-        .nav-tabs {
-            margin-top: 6%;
+        .table_header {
+            width: 100%;
+            height: 10%;
+            padding: 2.0rem .1rem .8rem 2.2rem;
         }
+
+        .table_body {
+            width: 95%;
+            background-color: #fff5;
+            margin: .8rem auto;
+            border-radius: .6rem;
+            overflow: auto;
+        }
+
+
+        .table_body::-webkit-scrollbar {
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+
+        .table_body::-webkit-scrollbar-thumb {
+            border-radius: .5rem;
+            background-color: #0004;
+            visibility: hidden;
+        }
+
+        .table_body:hover::-webkit-scrollbar-thumb {
+            visibility: visible;
+        }
+
+        main.table::-webkit-scrollbar {
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+
+        main.table::-webkit-scrollbar-thumb {
+            border-radius: .5rem;
+            background-color: #0004;
+            visibility: hidden;
+        }
+
+        main.table:hover::-webkit-scrollbar-thumb {
+            visibility: visible;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #0000000b;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(73, 98, 127, 0.4);
+            transition: .2s;
+        }
+
+        #myFiles {
+            display: none;
+        }
+
+        #mostViewed {
+            display: none;
+        }
+
+        .dnldbtn {
+            cursor: pointer;
+        }
+
+
+        .popup {
+            width: 400px;
+            height: 350px;
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1));
+            border-radius: 6px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 0 30px 30px;
+            color: #333;
+        }
+
+        .popup h2 {
+            font-size: 38px;
+            font-weight: 500;
+            margin: 20px 0 10px;
+        }
+
+        .popup button {
+            width: 80%;
+            margin-top: 50px;
+            padding: 10px 0px;
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.4), rgba(0, 123, 255, 0.4));
+            border: 0;
+            outline: none;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #description {
+            margin-top: 20px;
+            width: 100%;
+            height: 40px;
+            font-size: 19px;
+            text-align: center;
+        }
+
+        #filePicker {
+            color: #000;
+            font-size: 14px;
+            max-width: 270px;
+            margin-top: 30px;
+            margin-left: 85px;
+        }
+
     </style>
 </head>
 
 <body>
-
-    <div class="container">
-        <header class="mb-4">
-            <h1 class="mb-0">Welcome, <%= username %>
-            </h1>
-            <button class="btn btn-danger logout-btn" onclick="logout()">Logout</button>
-        </header>
-
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" id="allFilesTab" data-toggle="tab" href="#allFiles">All Files</a>
+    <nav>
+        <ul id="navList">
+            <li>
+                <a href="#" class="logo">
+                    <span class="nav-item"><%=username%></span>
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="myFilesTab" data-toggle="tab" href="#myFiles">My Files</a>
-            </li>
+            <li class="active"><a href="#" onclick="SetActive(this); allFiles()">
+                <i class="fas fa-home"></i>
+                <span class="nav-item">All Files</span>
+            </a></li>   
+            <li><a href="#" onclick="SetActive(this); myFiles()">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">My Files</span>
+            </a></li>   
+            <li><a href="#" onclick="SetActive(this); mostViewed()">
+                <i class="fas fa-chart-bar"></i>
+                <span class="nav-item">Most Viewed</span>
+            </a></li>
+            <li><a href="#" onclick="SetActive(this); upload()">
+                <i class="fas fa-upload"></i>
+                <span class="nav-item">Upload File</span>
+            </a></li>
+            <li><a href="#" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item">Log out</span>
+            </a></li>  
         </ul>
+    </nav>
 
-
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="allFiles">
-                <table class="table table-bordered center-table">
-                    <thead>
-                        <tr>
-                            <th>Filename</th>
-                            <th>Author</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>SampleFile.txt</td>
-                            <td>John Doe</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-action" onclick="preview()">Preview</button>
-                                <span></span>
-                                <button class="btn btn-primary btn-action" onclick="download()">Download</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>SampleFile.txt</td>
-                            <td>John Doe</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-action" onclick="preview()">Preview</button>
-                                <span></span>
-                                <button class="btn btn-primary btn-action" onclick="download()">Download</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>SampleFile.txt</td>
-                            <td>John Doe</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-action" onclick="preview()">Preview</button>
-                                <span></span>
-                                <button class="btn btn-primary btn-action" onclick="download()">Download</button>
-                            </td>
-                        </tr>
+    
 
 
 
-                    </tbody>
-                </table>
-            </div>
 
-            <div class="tab-pane fade" id="myFiles">
-                <table class="table table-bordered center-table">
-                    <thead>
-                        <tr>
-                            <th>Filename</th>
-                            <th>Author</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <tr>
-                            <td>.txt</td>
-                            <td>John Doe</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-action" onclick="deleteFile()">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>.txt</td>
-                            <td>John Doe</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-action" onclick="deleteFile()">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>.txt</td>
-                            <td>John Doe</td>
-                            <td>2023-01-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-action" onclick="deleteFile()">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
 
-        </div>
+    <main class="table" id="allFiles">
+        <section class="table_header">
+            <h1>All Uploaded Files</h1>
+            
+            <!-- search feature -->
 
-        <button class="btn btn-success upload-btn" onclick="uploadFile()">Upload File</button>
+        </section>
+        <section class="table_body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Checksum </th>
+                        <th> Description </th>
+                        <th> Size </th>
+                        <th> Uploaded By </th>
+                        <th> Upload Date </th>
+                        <th> Options </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td>16-12-2001</td>
+                        <td><span class="dnldbtn" onclick="download()">Download</span></td>
+                    </tr>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td>16-12-2001</td>
+                        <td><span class="dnldbtn" onclick="download()">Download</span></td>
+                    </tr>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td>16-12-2001</td>
+                        <td><span class="dnldbtn" onclick="download()">Download</span></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+
+    <main class="table" id="myFiles">
+        <section class="table_header">
+            <h1>My Files</h1>
+            
+            <!-- search feature -->
+
+        </section>
+        <section class="table_body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Checksum </th>
+                        <th> Description </th>
+                        <th> Size </th>
+                        <th> Uploaded By </th>
+                        <th> Upload Date </th>
+                        <th> Options </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td>16-12-2001</td>
+                        <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
+                    </tr>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td>16-12-2001</td>
+                        <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
+                    </tr>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td>16-12-2001</td>
+                        <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+
+    <main class="table" id="mostViewed">
+        <section class="table_header">
+            <h1>Most Downloaded</h1>
+            <!-- search feature -->
+
+        </section>
+        <section class="table_body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Checksum </th>
+                        <th> Description </th>
+                        <th> Size </th>
+                        <th> Uploaded By </th>
+                        <th> Total Downloads </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td><strong>35</strong></td>
+                    </tr>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td><strong>30</strong></td>
+                    </tr>
+                    <tr>
+                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
+                        <td>Random Description</td>
+                        <td>0 Byte</td>
+                        <td>Yamashi kumamoto</td>
+                        <td><strong>13</strong></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+
+
+    <div class="popup" id="uploadPopup" style="display: none;">
+        <h2>Upload File</h2>
+        <form>
+            <input type="file" id="filePicker" name="file" required>
+            <input type="text" id="description" name="description" required>
+            <button type="submit" onclick="uploadFile()">Upload</button>
+        </form>
     </div>
 
     <script>
-        console.warn('Homepage working')
-        function checkUserCookie() {
-            const allCookies = document.cookie;
-            const cookieArray = allCookies.split('; ');
-            const userCookie = cookieArray.find(cookie => cookie.startsWith('user='));
-            if (!userCookie) {
-                window.location.href = '/login';
+
+        var allFilesTable = document.getElementById('allFiles')
+        var myFilesTable = document.getElementById('myFiles')
+
+        function SetActive(element) {
+            var navList = document.getElementById('navList');
+            var listItems = navList.getElementsByTagName('li');
+            for (var i = 0; i < listItems.length; i++) {
+                listItems[i].classList.remove('active');
             }
-        }
-        checkUserCookie();
-        function logout() {
-            if(confirm('Do you want to logout ?')) {
-                document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                window.location.href = '/login';
-            }
+            element.closest('li').classList.add('active');
         }
 
-        function deleteFile() {
-
+        function upload() {
+            var e = document.getElementById('uploadPopup');
+            document.getElementById('allFiles').style.display = 'none';
+            document.getElementById('myFiles').style.display = 'none';
+            document.getElementById('mostViewed').style.display = 'none';
+            e.style.display = 'block';
         }
 
-        function preview() {
+        function allFiles() {
+            document.getElementById('allFiles').style.display = 'block';
+            document.getElementById('myFiles').style.display = 'none';
+            document.getElementById('mostViewed').style.display = 'none';
+            document.getElementById('uploadPopup').style.display = 'none';
+        }
 
+        function myFiles() {
+            document.getElementById('allFiles').style.display = 'none';
+            document.getElementById('myFiles').style.display = 'block';
+            document.getElementById('mostViewed').style.display = 'none';
+            document.getElementById('uploadPopup').style.display = 'none';
+        }
+
+        function mostViewed() { 
+            document.getElementById('allFiles').style.display = 'none';
+            document.getElementById('myFiles').style.display = 'none';
+            document.getElementById('mostViewed').style.display = 'block';
+            document.getElementById('uploadPopup').style.display = 'none';
         }
 
         function uploadFile() {
-            alert('uploaded ')
-            window.location.href = '/upload';
-        }
-
-        function download() {
-            alert('deleted');
-            console.log('Deleting file:');
+            // xhr request
         }
     </script>
 </body>
-
 </html>
