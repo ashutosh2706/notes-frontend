@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome <%=username%></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <title>Welcome <%=username%>
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
         * {
             margin: 0;
             padding: 0;
@@ -50,6 +54,7 @@
             font-size: 18px;
             text-transform: uppercase;
         }
+
         a {
             position: relative;
             color: rgba(85, 83, 83);
@@ -57,23 +62,23 @@
             display: table;
             width: 300px;
             padding: 10px;
-         }
+        }
 
-         .fas {
+        .fas {
             position: relative;
             width: 85px;
             height: 45px;
             top: 14px;
             font-size: 20px;
             text-align: center;
-         }
+        }
 
-         .nav-item {
+        .nav-item {
             position: relative;
             top: 12px;
             margin-left: 10px;
 
-         }
+        }
 
         a:hover {
             background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1));
@@ -83,8 +88,10 @@
             transition: 0.1s ease;
             background: linear-gradient(to right, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1));
         }
-        
-        table, th, td {
+
+        table,
+        th,
+        td {
             padding: 1rem;
         }
 
@@ -185,6 +192,7 @@
             text-align: center;
             padding: 0 30px 30px;
             color: #333;
+            display: none;
         }
 
         .popup h2 {
@@ -221,7 +229,6 @@
             margin-top: 30px;
             margin-left: 85px;
         }
-
     </style>
 </head>
 
@@ -230,33 +237,35 @@
         <ul id="navList">
             <li>
                 <a href="#" class="logo">
-                    <span class="nav-item"><%=username%></span>
+                    <span class="nav-item">
+                        <%=username%>
+                    </span>
                 </a>
             </li>
             <li class="active"><a href="#" onclick="SetActive(this); allFiles()">
-                <i class="fas fa-home"></i>
-                <span class="nav-item">All Files</span>
-            </a></li>   
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item">All Files</span>
+                </a></li>
             <li><a href="#" onclick="SetActive(this); myFiles()">
-                <i class="fas fa-user"></i>
-                <span class="nav-item">My Files</span>
-            </a></li>   
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item">My Files</span>
+                </a></li>
             <li><a href="#" onclick="SetActive(this); mostViewed()">
-                <i class="fas fa-chart-bar"></i>
-                <span class="nav-item">Most Viewed</span>
-            </a></li>
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="nav-item">Most Viewed</span>
+                </a></li>
             <li><a href="#" onclick="SetActive(this); upload()">
-                <i class="fas fa-upload"></i>
-                <span class="nav-item">Upload File</span>
-            </a></li>
+                    <i class="fas fa-upload"></i>
+                    <span class="nav-item">Upload File</span>
+                </a></li>
             <li><a href="#" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i>
-                <span class="nav-item">Log out</span>
-            </a></li>  
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="nav-item">Log out</span>
+                </a></li>
         </ul>
     </nav>
 
-    
+
 
 
 
@@ -265,8 +274,8 @@
 
     <main class="table" id="allFiles">
         <section class="table_header">
-            <h1>All Uploaded Files</h1>
-            
+            <h1>All Files</h1>
+
             <!-- search feature -->
 
         </section>
@@ -307,7 +316,7 @@
                         <td>16-12-2001</td>
                         <td><span class="dnldbtn" onclick="download()">Download</span></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </section>
@@ -317,7 +326,7 @@
     <main class="table" id="myFiles">
         <section class="table_header">
             <h1>My Files</h1>
-            
+
             <!-- search feature -->
 
         </section>
@@ -358,7 +367,7 @@
                         <td>16-12-2001</td>
                         <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </section>
@@ -404,7 +413,7 @@
                         <td>Yamashi kumamoto</td>
                         <td><strong>13</strong></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </section>
@@ -412,16 +421,23 @@
 
 
 
-    <div class="popup" id="uploadPopup" style="display: none;">
+    <div class="popup" id="uploadPopup">
         <h2>Upload File</h2>
-        <form>
+        <form onsubmit="uploadFile(event)">
             <input type="file" id="filePicker" name="file" required>
             <input type="text" id="description" name="description" required>
-            <button type="submit" onclick="uploadFile()">Upload</button>
+            <button type="submit"">Upload</button>
         </form>
     </div>
 
     <script>
+
+        const allCookies = document.cookie;
+        const cookieArray = allCookies.split('; ');
+        const userCookie = cookieArray.find(cookie => cookie.startsWith('user='));
+        if (!userCookie) {
+            window.location.href = '/login';
+        }
 
         var allFilesTable = document.getElementById('allFiles')
         var myFilesTable = document.getElementById('myFiles')
@@ -457,16 +473,40 @@
             document.getElementById('uploadPopup').style.display = 'none';
         }
 
-        function mostViewed() { 
+        function mostViewed() {
             document.getElementById('allFiles').style.display = 'none';
             document.getElementById('myFiles').style.display = 'none';
             document.getElementById('mostViewed').style.display = 'block';
             document.getElementById('uploadPopup').style.display = 'none';
         }
 
-        function uploadFile() {
-            // xhr request
+        function logout() {
+            if (confirm('Do you want to logout ?')) {
+                document.cookie = " user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = '/login';
+            }
+        } function uploadFile(e) {
+            e.preventDefault(); var
+                fileInput = document.getElementById('filePicker'); if (fileInput.files.length > 0) {
+                    var req = new FormData();
+                    req.append('file', fileInput.files[0]);
+                    req.append('desc', document.getElementById('description').value);
+
+
+                    axios.post('http://localhost:8080/api/upload', req)
+                        .then(response => {
+                            console.log('Success:', response.data);
+                            alert('Upload Success');
+                            allFiles();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred');
+                        });
+                }
+
         }
     </script>
 </body>
+
 </html>

@@ -7,7 +7,7 @@ document.getElementById('signup-form').addEventListener('submit', function (even
     const confirmPassword = document.getElementById('conf-password').value;
     if (password === confirmPassword) {
 
-        axios.post('/register', { username, password })
+        axios.post('http://localhost:8080/api/register', { username, password })
             .then(response => {
                 setCookie('user',username,7);
                 alert('Registration Successful');
