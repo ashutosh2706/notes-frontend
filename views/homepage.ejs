@@ -93,6 +93,7 @@
         th,
         td {
             padding: 1rem;
+            text-align: center;
         }
 
         .table {
@@ -265,13 +266,6 @@
         </ul>
     </nav>
 
-
-
-
-
-
-
-
     <main class="table" id="allFiles">
         <section class="table_header">
             <h1>All Files</h1>
@@ -292,30 +286,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td>16-12-2001</td>
-                        <td><span class="dnldbtn" onclick="download()">Download</span></td>
-                    </tr>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td>16-12-2001</td>
-                        <td><span class="dnldbtn" onclick="download()">Download</span></td>
-                    </tr>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td>16-12-2001</td>
-                        <td><span class="dnldbtn" onclick="download()">Download</span></td>
-                    </tr>
+
+                    <% all_files.forEach(item=> { %>
+                        <tr>
+                            <td>
+                                <%= item.fileName %>
+                            </td>
+                            <td>
+                                <%= item.subject %>
+                            </td>
+                            <td>
+                                <%= item.size %>
+                            </td>
+                            <td>
+                                <%= item.author %>
+                            </td>
+                            <td>
+                                <%= item.uploadDate %>
+                            </td>
+                            <td>
+                                <span class="dnldbtn" onclick="download('<%= item.noteID%>')">Download</span>
+                            </td>
+                        </tr>
+                        <% }); %>
 
                 </tbody>
             </table>
@@ -343,31 +336,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td>16-12-2001</td>
-                        <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
-                    </tr>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td>16-12-2001</td>
-                        <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
-                    </tr>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td>16-12-2001</td>
-                        <td><span class="dnldbtn" onclick="deleteFile()">Delete</span></td>
-                    </tr>
 
+                    <% my_files.forEach(item=> { %>
+                        <tr>
+                            <td>
+                                <%= item.fileName %>
+                            </td>
+                            <td>
+                                <%= item.subject %>
+                            </td>
+                            <td>
+                                <%= item.size %>
+                            </td>
+                            <td>
+                                <%= item.author %>
+                            </td>
+                            <td>
+                                <%= item.uploadDate %>
+                            </td>
+                            <td><span class="dnldbtn" onclick="deleteFile('<%= item.noteID%>')">Delete</span></td>
+                        </tr>
+                        <% }); %>
                 </tbody>
             </table>
         </section>
@@ -392,28 +381,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td><strong>35</strong></td>
-                    </tr>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td><strong>30</strong></td>
-                    </tr>
-                    <tr>
-                        <td>KJ3o2DKtIkvYIK3UENzmM7KCkRr.txt</td>
-                        <td>Random Description</td>
-                        <td>0 Byte</td>
-                        <td>Yamashi kumamoto</td>
-                        <td><strong>13</strong></td>
-                    </tr>
-
+                    <% const sortedFiles=all_files.sort((a, b)=> b.download_count - a.download_count);
+                        sortedFiles.forEach(item=> {
+                        %>
+                        <tr>
+                            <td>
+                                <%= item.fileName %>
+                            </td>
+                            <td>
+                                <%= item.subject %>
+                            </td>
+                            <td>
+                                <%= item.size %>
+                            </td>
+                            <td>
+                                <%= item.author %>
+                            </td>
+                            <td>
+                                <strong>
+                                    <%= item.download_count %>
+                                </strong>
+                            </td>
+                        </tr>
+                        <% }); %>
                 </tbody>
             </table>
         </section>
@@ -423,21 +413,15 @@
 
     <div class="popup" id="uploadPopup">
         <h2>Upload File</h2>
-        <form onsubmit="uploadFile(event)">
+        <form method="post" id="uploadForm">
             <input type="file" id="filePicker" name="file" required>
-            <input type="text" id="description" name="description" required>
-            <button type="submit"">Upload</button>
+            <input type="text" id="description" name="subject" required>
+            <input type="hidden" name="user" value=<%=username%>>
+            <button type="submit">Upload</button>
         </form>
     </div>
 
     <script>
-
-        const allCookies = document.cookie;
-        const cookieArray = allCookies.split('; ');
-        const userCookie = cookieArray.find(cookie => cookie.startsWith('user='));
-        if (!userCookie) {
-            window.location.href = '/login';
-        }
 
         var allFilesTable = document.getElementById('allFiles')
         var myFilesTable = document.getElementById('myFiles')
@@ -457,6 +441,57 @@
             document.getElementById('myFiles').style.display = 'none';
             document.getElementById('mostViewed').style.display = 'none';
             e.style.display = 'block';
+        }
+
+        async function download(uid) {
+
+            console.log(uid);
+
+            try {
+                const apiUrl = '<%= API_BASE_URL %>/download/' + uid;
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const contentDisposition = response.headers.get('Content-Disposition');
+                const filenameMatch = contentDisposition && contentDisposition.match(/filename="(.*)"/);
+                const filename = filenameMatch ? filenameMatch[1] : 'downloaded_file.bin';
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+            } catch (error) {
+                console.error('Error:', error.message);
+            }
+
+        }
+
+        function deleteFile(uid) {
+
+            const req = new FormData();
+            req.append('noteId', uid);
+
+            axios.post('<%= API_BASE_URL%>/delete', req)
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Deleted Successfully');
+                        location.reload(true);
+                    } else {
+                        alert('An error occurred: ' + response.status);
+                    }
+                })
+                .catch(error => {
+                    alert('Delete Failed');
+                    console.error(error.response.data);
+                });
+
         }
 
         function allFiles() {
@@ -485,27 +520,37 @@
                 document.cookie = " user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 window.location.href = '/login';
             }
-        } function uploadFile(e) {
-            e.preventDefault(); var
-                fileInput = document.getElementById('filePicker'); if (fileInput.files.length > 0) {
-                    var req = new FormData();
-                    req.append('file', fileInput.files[0]);
-                    req.append('desc', document.getElementById('description').value);
-
-
-                    axios.post('http://localhost:8080/api/upload', req)
-                        .then(response => {
-                            console.log('Success:', response.data);
-                            alert('Upload Success');
-                            allFiles();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('An error occurred');
-                        });
-                }
-
         }
+
+        function setCookie(name, val, exp) {
+            const curDate = new Date();
+            curDate.setTime(curDate.getTime() + (exp * 24 * 60 * 60 * 1000));
+            document.cookie = name + '=' + val + ';' +
+                'expires=' + curDate.toUTCString() + ';' +
+                'path=/';
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            axios.post('<%= API_BASE_URL%>/upload', new FormData(this), {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Uploaded Successfully');
+                        location.reload(true);
+                    } else {
+                        alert('An error occurred: ' + response.status);
+                    }
+                })
+                .catch(error => {
+                    alert('Upload Failed');
+                    console.error(error.response.data);
+                });
+        });
+
     </script>
 </body>
 

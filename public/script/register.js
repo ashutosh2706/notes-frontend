@@ -7,9 +7,10 @@ document.getElementById('signup-form').addEventListener('submit', function (even
     const confirmPassword = document.getElementById('conf-password').value;
     if (password === confirmPassword) {
 
-        axios.post('http://localhost:8080/api/register', { username, password })
+        console.log({ username, password })
+
+        axios.post('/register', { username, password })
             .then(response => {
-                setCookie('user',username,7);
                 alert('Registration Successful');
                 window.location.href = '/login'
             })
@@ -22,12 +23,3 @@ document.getElementById('signup-form').addEventListener('submit', function (even
         alert('Passwords do not match. Make sure both the passwords match and try again.');
     }
 });
-
-
-function setCookie(name, val, exp) {
-    const curDate = new Date();
-    curDate.setTime(curDate.getTime() + (exp * 24 * 60 * 60 * 1000));
-    document.cookie = name + '=' + val + ';' +
-        'expires=' + curDate.toUTCString() + ';' +
-        'path=/';
-}
